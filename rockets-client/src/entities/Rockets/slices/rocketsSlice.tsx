@@ -8,7 +8,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import qs from "qs";
 import axios from "@/shared/axios/axiosInstance";
-import { AppStore } from "@/appTemp/store/store";
+import { AppStore } from "@/app/store/store";
 
 export const fetchRockets = createAsyncThunk(
   "rockets/fetchRockets",
@@ -25,7 +25,7 @@ export const fetchRockets = createAsyncThunk(
     const response = await axios.get<RocketsResponse>(`/rockets`, {
       params,
       paramsSerializer: {
-        serialize: (params) => {
+        serialize: (params: any) => {
           return qs.stringify(params, { arrayFormat: "repeat" });
         },
       },
@@ -50,7 +50,7 @@ export const refetchRockets = createAsyncThunk(
     const response = await axios.get<RocketsResponse>(`/rockets`, {
       params,
       paramsSerializer: {
-        serialize: (params) => {
+        serialize: (params: any) => {
           return qs.stringify(params, { arrayFormat: "repeat" });
         },
       },
