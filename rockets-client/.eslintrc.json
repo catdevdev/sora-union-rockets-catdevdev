@@ -1,3 +1,20 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": ["next/core-web-vitals"]
+  // "rules": {
+  //   "import/order": [
+  //     "error",
+  //     {
+  //       "groups": [
+  //         "index",
+  //         "sibling",
+  //         "parent",
+  //         "internal",
+  //         "external",
+  //         "builtin",
+  //         "object",
+  //         "type"
+  //       ]
+  //     }
+  //   ]
+  // }
 }

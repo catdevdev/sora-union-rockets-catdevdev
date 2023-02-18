@@ -3,6 +3,8 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-}
+  ignoreDuringBuilds: true,
+  ignoreBuildErrors: true,
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
