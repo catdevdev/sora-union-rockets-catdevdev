@@ -1,24 +1,16 @@
-export interface Rockets {
+export interface Rocket {
   id: number;
   title: string;
   rocket_name: string;
   description: string;
+  isUploading: boolean;
 }
 
-export type RocketsResponse = Rockets[];
-
 export interface RocketsInitialState {
-  rockets: Rockets[];
+  rockets: Rocket[];
   page: number;
   isLoading: boolean;
   isPaginationLoading: boolean;
   hasMore: boolean;
   error: string | null | undefined;
-}
-
-export interface RocketsParams {
-  page: {
-    limit: number;
-    number: number;
-  };
 }

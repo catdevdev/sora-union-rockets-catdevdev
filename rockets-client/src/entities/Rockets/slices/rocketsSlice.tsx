@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { fetchMoreRockets } from "../api/fetchMoreRockets";
-import { fetchRockets } from "../api/fetchRockets";
+import { createRocket } from "../api/createRocket/createRocket";
+import { deleteRocketById } from "../api/deleteRocketById/deleteRocketById";
+import { fetchMoreRockets } from "../api/fetchMoreRockets/fetchMoreRockets";
+import { fetchRockets } from "../api/fetchRockets/fetchRockets";
 import { RocketsInitialState } from "../models/rockets";
 
 const rocketsSlice = createSlice({
@@ -24,7 +26,10 @@ const rocketsSlice = createSlice({
         state.hasMore = false;
         state.isLoading = false;
       }
-      state.rockets = action.payload;
+      state.rockets = action.payload.map((rocket) => ({
+        ...rocket,
+        isUploading: false,
+      }));
       state.page += 1;
       state.isLoading = false;
     });
@@ -40,7 +45,10 @@ const rocketsSlice = createSlice({
       state.isPaginationLoading = true;
     });
     builder.addCase(fetchMoreRockets.fulfilled, (state, action) => {
-      state.rockets = action.payload;
+      state.rockets = action.payload.map((rocket) => ({
+        ...rocket,
+        isUploading: false,
+      }));
       state.page += 1;
 
       state.isLoading = false;
@@ -52,6 +60,40 @@ const rocketsSlice = createSlice({
       state.isLoading = false;
       state.isPaginationLoading = false;
     });
+
+    //
+
+    builder.addCase(createRocket.pending, (state, action) => {
+      state.rockets = [
+        ...state.rockets,
+        {
+          id: state.rockets.length + 1,
+          title: action.meta.arg.title,
+          rocket_name: action.meta.arg.rocket_name,
+          description: action.meta.arg.description,
+          isUploading: true,
+        },
+      ];
+    });
+    builder.addCase(createRocket.fulfilled, (state, action) => {
+      state.rockets = [
+        ...state.rockets,
+        {
+          id: action.payload.id,
+          title: action.payload.title,
+          rocket_name: action.payload.rocket_name,
+          description: action.payload.description,
+          isUploading: false,
+        },
+      ];
+    });
+    builder.addCase(createRocket.rejected, (state, action) => {});
+
+    //
+
+    builder.addCase(deleteRocketById.pending, (state) => {});
+    builder.addCase(deleteRocketById.fulfilled, (state, action) => {});
+    builder.addCase(deleteRocketById.rejected, (state, action) => {});
   },
 });
 

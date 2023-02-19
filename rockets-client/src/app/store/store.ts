@@ -1,4 +1,3 @@
-import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import {
   AnyAction,
   CombinedState,
@@ -6,6 +5,7 @@ import {
   Reducer,
   ThunkDispatch,
 } from "@reduxjs/toolkit";
+import { createWrapper, HYDRATE } from "next-redux-wrapper";
 import { combineReducers } from "redux";
 
 import { RocketsInitialState } from "@/entities/Rockets/models/rockets";

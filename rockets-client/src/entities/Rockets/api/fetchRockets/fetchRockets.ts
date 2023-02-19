@@ -4,10 +4,10 @@ import qs from "qs";
 import { AppStore } from "@/app/store/store";
 import axios from "@/shared/axios/axiosInstance";
 
-import { RocketsParams, RocketsResponse } from "../models/rockets";
+import { RocketsParams, RocketsResponse } from "./types";
 
-export const fetchMoreRockets = createAsyncThunk(
-  "rockets/fetchMoreRockets",
+export const fetchRockets = createAsyncThunk(
+  "rockets/fetchRockets",
   async (_, thunkAPI): Promise<RocketsResponse> => {
     const getState = thunkAPI.getState as AppStore["getState"];
 
