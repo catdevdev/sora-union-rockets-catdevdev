@@ -67,7 +67,7 @@ const rocketsSlice = createSlice({
       state.rockets = [
         ...state.rockets,
         {
-          id: state.rockets.length + 1,
+          id: state.rockets.length + 2,
           title: action.meta.arg.title,
           rocket_name: action.meta.arg.rocket_name,
           description: action.meta.arg.description,
@@ -76,16 +76,17 @@ const rocketsSlice = createSlice({
       ];
     });
     builder.addCase(createRocket.fulfilled, (state, action) => {
-      state.rockets = [
-        ...state.rockets,
-        {
-          id: action.payload.id,
-          title: action.payload.title,
-          rocket_name: action.payload.rocket_name,
-          description: action.payload.description,
-          isUploading: false,
-        },
-      ];
+      state.rockets.forEach((rocket, index) => {
+        if (rocket.id === action.payload.id) {
+          state.rockets[index] = {
+            id: action.payload.id,
+            title: action.payload.title,
+            rocket_name: action.payload.rocket_name,
+            description: action.payload.description,
+            isUploading: false,
+          };
+        }
+      });
     });
     builder.addCase(createRocket.rejected, (state, action) => {});
 

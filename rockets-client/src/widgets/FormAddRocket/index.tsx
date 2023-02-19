@@ -1,14 +1,19 @@
 import { Button, Card, Form, Input, InputNumber } from "antd";
 
-const onFinish = (values: any) => {
-  console.log("Success:", values);
-};
+import { createRocket } from "@/entities/Rockets/api/createRocket/createRocket";
+import { Rocket } from "@/entities/Rockets/models/rockets";
+import { useAppDispatch } from "@/shared/hooks/redux";
 
 const onFinishFailed = (errorInfo: any) => {
   console.log("Failed:", errorInfo);
 };
 
 const FormAddRocket = ({}) => {
+  const dispatch = useAppDispatch();
+  const onFinish = (values: Omit<Rocket, "id" | "isUploding">) => {
+    dispatch(createRocket(values));
+  };
+
   return (
     <Card>
       <Form

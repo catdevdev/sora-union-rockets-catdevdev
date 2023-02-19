@@ -9,12 +9,13 @@ const RocketList = () => {
 
   return (
     <Row gutter={[0, 24]}>
-      {rockets.map((rocket) => (
+      {[...rockets].reverse().map((rocket) => (
         <RocketCard
           key={rocket.id}
           title={rocket.title}
           rocketName={rocket.rocket_name}
           description={rocket.description}
+          isUploading={rocket.isUploading}
         />
       ))}
     </Row>
