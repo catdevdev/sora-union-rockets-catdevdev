@@ -1,64 +1,8 @@
-import {
-  RocketsInitialState,
-  RocketsParams,
-  RocketsResponse,
-} from "../models/rockets";
+import { createSlice } from "@reduxjs/toolkit";
 
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
-import qs from "qs";
-import axios from "@/shared/axios/axiosInstance";
-import { AppStore } from "@/app/store/store";
-
-export const fetchRockets = createAsyncThunk(
-  "rockets/fetchRockets",
-  async (_, thunkAPI): Promise<RocketsResponse> => {
-    const getState = thunkAPI.getState as AppStore["getState"];
-
-    const params: RocketsParams = {
-      page: {
-        limit: 15,
-        number: getState().rocketsState.page,
-      },
-    };
-
-    const response = await axios.get<RocketsResponse>(`/rockets`, {
-      params,
-      paramsSerializer: {
-        serialize: (params: any) => {
-          return qs.stringify(params, { arrayFormat: "repeat" });
-        },
-      },
-    });
-
-    return response.data;
-  }
-);
-
-export const refetchRockets = createAsyncThunk(
-  "rockets/refetchRockets",
-  async (_, thunkAPI): Promise<RocketsResponse> => {
-    const getState = thunkAPI.getState as AppStore["getState"];
-
-    const params: RocketsParams = {
-      page: {
-        limit: 15,
-        number: getState().rocketsState.page,
-      },
-    };
-
-    const response = await axios.get<RocketsResponse>(`/rockets`, {
-      params,
-      paramsSerializer: {
-        serialize: (params: any) => {
-          return qs.stringify(params, { arrayFormat: "repeat" });
-        },
-      },
-    });
-
-    return response.data;
-  }
-);
+import { fetchMoreRockets } from "../api/fetchMoreRockets";
+import { fetchRockets } from "../api/fetchRockets";
+import { RocketsInitialState } from "../models/rockets";
 
 const rocketsSlice = createSlice({
   name: "rockets",
@@ -76,11 +20,11 @@ const rocketsSlice = createSlice({
       state.isLoading = true;
     });
     builder.addCase(fetchRockets.fulfilled, (state, action) => {
-      if (action.payload.rockets.length === 0) {
+      if (action.payload.length === 0) {
         state.hasMore = false;
         state.isLoading = false;
       }
-      state.rockets = state.rockets.concat(action.payload.rockets);
+      state.rockets = action.payload;
       state.page += 1;
       state.isLoading = false;
     });
@@ -91,19 +35,19 @@ const rocketsSlice = createSlice({
 
     //
 
-    builder.addCase(refetchRockets.pending, (state) => {
+    builder.addCase(fetchMoreRockets.pending, (state) => {
       state.isLoading = true;
       state.isPaginationLoading = true;
     });
-    builder.addCase(refetchRockets.fulfilled, (state, action) => {
-      state.rockets = action.payload.rockets;
+    builder.addCase(fetchMoreRockets.fulfilled, (state, action) => {
+      state.rockets = action.payload;
       state.page += 1;
 
       state.isLoading = false;
       state.isPaginationLoading = false;
       state.hasMore = true;
     });
-    builder.addCase(refetchRockets.rejected, (state, action) => {
+    builder.addCase(fetchMoreRockets.rejected, (state, action) => {
       state.error = action.error.message;
       state.isLoading = false;
       state.isPaginationLoading = false;

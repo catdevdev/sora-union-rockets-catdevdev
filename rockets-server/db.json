@@ -3,7 +3,30 @@
     {
       "id": 1,
       "title": "json-server",
-      "author": "typicode"
+      "rocket_name": "typicode",
+      "description": "typicode",
+      "github_user": {}
+    },
+    {
+      "id": 2,
+      "title": "json-server",
+      "rocket_name": "typicode",
+      "description": "typicode",
+      "github_user": {}
+    },
+    {
+      "id": 3,
+      "title": "json-server",
+      "rocket_name": "typicode",
+      "description": "typicode",
+      "github_user": {}
+    },
+    {
+      "id": 4,
+      "title": "json-server",
+      "rocket_name": "typicode",
+      "description": "typicode",
+      "github_user": {}
     }
   ]
 }

@@ -1,19 +1,21 @@
 import { wrapper } from "@/app/store/store";
 import { fetchRockets } from "@/entities/Rockets";
 import { useAppSelector } from "@/shared/hooks/redux";
-import axios from "@/shared/axios/axiosInstance";
+import { RocketsList } from "@/widgets/RocketsList";
 
 const Index = () => {
-  const rockets = useAppSelector((state) => state.rocketsState.rockets);
-  const a = axios.get("/rockets");
-
-  return <div>{123}</div>;
+  return (
+    <div>
+      <pre>{}</pre>
+    </div>
+  );
 };
 
-export const getStaticProps = wrapper.getStaticProps(
+export const getServerSideProps = wrapper.getServerSideProps(
   // @ts-ignore
   (store) => async () => {
     await store.dispatch(fetchRockets());
+    return {};
   }
 );
 

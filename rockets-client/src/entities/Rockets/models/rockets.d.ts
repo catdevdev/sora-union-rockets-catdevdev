@@ -4,9 +4,7 @@ export interface Rockets {
   configuration_name: string;
 }
 
-export interface RocketsResponse {
-  rockets: Rockets[];
-}
+export type RocketsResponse = Rockets[];
 
 export interface RocketsInitialState {
   rockets: Rockets[];
