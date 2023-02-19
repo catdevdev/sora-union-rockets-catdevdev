@@ -1,7 +1,8 @@
 export interface Rockets {
   id: number;
-  name: string;
-  configuration_name: string;
+  title: string;
+  rocket_name: string;
+  description: string;
 }
 
 export type RocketsResponse = Rockets[];

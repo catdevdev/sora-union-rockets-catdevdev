@@ -7,11 +7,14 @@ const Container = () => {
 
   return (
     <div>
-      {rockets.map((rocket) => {
-        return (
-          <RocketCard key={rocket.id} title={rocket.name} description={""} />
-        );
-      })}
+      {rockets.map((rocket) => (
+        <RocketCard
+          key={rocket.id}
+          title={rocket.title}
+          rocketName={rocket.rocket_name}
+          description={rocket.description}
+        />
+      ))}
     </div>
   );
 };
