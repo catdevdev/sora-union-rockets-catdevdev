@@ -1,0 +1,11 @@
+name: sora-union-rockets-catdevdev
+version: 1.0.0
+description: ""
+main: index.js
+scripts:
+  dev: concurrently "pnpm -F=rockets-client dev" "pnpm -F=rockets-server start"
+keywords: []
+author: ""
+license: ISC
+dependencies:
+  concurrently: "^7.6.0"

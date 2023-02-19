@@ -10,5 +10,5 @@ RUN pnpm install
 
 COPY . .
 
-EXPOSE 8001
+EXPOSE 5555
 

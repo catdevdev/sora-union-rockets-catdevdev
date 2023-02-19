@@ -1,0 +1,5 @@
+packages:
+  - "rockets-server"
+  - "rockets-client"
+scripts:
+  "start:dev": "pnpm -F=rockets-client dev && pnpm -F=rockets-client dev"

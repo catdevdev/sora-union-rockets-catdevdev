@@ -1,8 +1,11 @@
 import { wrapper } from "@/app/store/store";
+import { fetchRockets } from "@/entities/Rockets";
 import { useAppSelector } from "@/shared/hooks/redux";
+import axios from "@/shared/axios/axiosInstance";
 
 const Index = () => {
   const rockets = useAppSelector((state) => state.rocketsState.rockets);
+  const a = axios.get("/rockets");
 
   return <div>{123}</div>;
 };
@@ -10,20 +13,7 @@ const Index = () => {
 export const getStaticProps = wrapper.getStaticProps(
   // @ts-ignore
   (store) => async () => {
-    const {
-      colours: { selected: selectedColours },
-      shapes: { selected: selectedShapes },
-    } = store.getState().filtersState.filterOptions;
-
-    await store.dispatch(fetchCollections());
-    store.dispatch(
-      collectionsSlice.actions.setSelectedCollection({
-        id: 1,
-      })
-    );
-    await store.dispatch(
-      fetchGlasses({ colours: selectedColours, shapes: selectedShapes })
-    );
+    await store.dispatch(fetchRockets());
   }
 );
 

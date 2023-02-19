@@ -1,5 +1,5 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "https://staging-api.bloobloom.com/user/v1/sales_channels/website/",
+  baseURL: "http://0.0.0.0:5555/",
 });

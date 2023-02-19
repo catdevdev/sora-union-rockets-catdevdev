@@ -1,0 +1,11 @@
+name: rockets-server
+version: 1.0.0
+description: ""
+main: index.js
+scripts:
+  start: json-server -H 0.0.0.0 --watch db.json --port 5555
+keywords: []
+author: ""
+license: ISC
+dependencies:
+  json-server: "^0.17.1"

@@ -2,8 +2,9 @@ version: "3"
 services:
   rockets-client:
     build: ./rockets-client
+
     ports:
-      - "8000:8000"
+      - "5554:5554"
     volumes:
       - ./rockets-client:/app
     command: pnpm dev
@@ -11,7 +12,7 @@ services:
   rockets-server:
     build: ./rockets-server
     ports:
-      - "8001:8001"
+      - "5555:5555"
     volumes:
       - ./rockets-server:/app
     command: pnpm start
