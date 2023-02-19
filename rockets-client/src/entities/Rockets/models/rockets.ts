@@ -4,6 +4,7 @@ export interface Rocket {
   rocket_name: string;
   description: string;
   isUploading: boolean;
+  requestId: string;
 }
 
 export interface RocketsInitialState {

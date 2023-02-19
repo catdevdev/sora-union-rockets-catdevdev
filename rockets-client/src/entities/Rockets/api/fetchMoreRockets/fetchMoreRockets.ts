@@ -12,10 +12,8 @@ export const fetchMoreRockets = createAsyncThunk(
     const getState = thunkAPI.getState as AppStore["getState"];
 
     const params: RocketsParams = {
-      page: {
-        limit: 15,
-        number: getState().rocketsState.page,
-      },
+      _page: getState().rocketsState.page,
+      _limit: 2,
     };
 
     const response = await axios.get<RocketsResponse>(`/rockets`, {

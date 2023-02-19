@@ -1,24 +1,45 @@
-import { Col, Row } from "antd";
+import { Col, Row, Spin } from "antd";
+import InfiniteScroll from "react-infinite-scroll-component";
 
-import { useAppSelector } from "@/shared/hooks/redux";
+import { fetchMoreRockets, fetchRockets } from "@/entities/Rockets";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
 
 import RocketCard from "../RocketCard";
 
 const RocketList = () => {
+  const dispatch = useAppDispatch();
+
+  const { isLoading, isPaginationLoading, hasMore } = useAppSelector(
+    (state) => state.rocketsState
+  );
+
   const rockets = useAppSelector((state) => state.rocketsState.rockets);
 
+  const fetchMoreData = () => {
+    if (!isLoading && hasMore) {
+      dispatch(fetchMoreRockets());
+    }
+  };
+
   return (
-    <Row gutter={[0, 24]}>
-      {[...rockets].reverse().map((rocket) => (
-        <RocketCard
-          key={rocket.id}
-          title={rocket.title}
-          rocketName={rocket.rocket_name}
-          description={rocket.description}
-          isUploading={rocket.isUploading}
-        />
-      ))}
-    </Row>
+    <InfiniteScroll
+      dataLength={rockets.length}
+      next={fetchMoreData}
+      hasMore={hasMore}
+      loader={<Spin />}
+    >
+      <Row gutter={[0, 24]}>
+        {[...rockets].reverse().map((rocket) => (
+          <RocketCard
+            key={rocket.id}
+            title={`${rocket.title} + ${rocket.id}`}
+            rocketName={rocket.rocket_name}
+            description={rocket.description}
+            isUploading={rocket.isUploading}
+          />
+        ))}
+      </Row>
+    </InfiniteScroll>
   );
 };
 

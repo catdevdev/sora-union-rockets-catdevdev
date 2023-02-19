@@ -14,7 +14,7 @@ const RocketCard = ({
   isUploading,
 }: RocketCardProps) => {
   return (
-    <Card title="Card title" bordered={false} style={{ width: "100%" }}>
+    <Card title={title} bordered={false} style={{ width: "100%" }}>
       {isUploading ? <Spin /> : null}
       {title}, {rocketName}, {description}
     </Card>
