@@ -1,12 +1,14 @@
+import { Col, Row } from "antd";
+
 import { useAppSelector } from "@/shared/hooks/redux";
 
 import RocketCard from "../RocketCard";
 
-const Container = () => {
+const RocketList = () => {
   const rockets = useAppSelector((state) => state.rocketsState.rockets);
 
   return (
-    <div>
+    <Row gutter={[0, 24]}>
       {rockets.map((rocket) => (
         <RocketCard
           key={rocket.id}
@@ -15,8 +17,8 @@ const Container = () => {
           description={rocket.description}
         />
       ))}
-    </div>
+    </Row>
   );
 };
 
-export default Container;
+export default RocketList;

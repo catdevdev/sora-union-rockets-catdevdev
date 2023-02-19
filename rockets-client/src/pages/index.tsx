@@ -1,11 +1,23 @@
+import { Col, Row } from "antd";
+
 import { wrapper } from "@/app/store/store";
 import { fetchRockets } from "@/entities/Rockets";
 import { useAppSelector } from "@/shared/hooks/redux";
+import FormAddRocket from "@/widgets/FormAddRocket";
 import { LayoutWrapper } from "@/widgets/Layout";
 import { RocketsList } from "@/widgets/RocketsList";
 
 const Index = () => {
-  return <div>123</div>;
+  return (
+    <Row justify="center" gutter={[36, 0]}>
+      <Col style={{ width: 350 }}>
+        <RocketsList />
+      </Col>
+      <Col style={{ width: 300 }}>
+        <FormAddRocket />
+      </Col>
+    </Row>
+  );
 };
 
 Index.getLayout = (page: React.ReactElement) => (

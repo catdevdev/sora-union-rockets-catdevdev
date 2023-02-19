@@ -6,11 +6,9 @@ interface RocketCardProps {
   description: string;
 }
 
-
-
 const RocketCard = ({ title, rocketName, description }: RocketCardProps) => {
   return (
-    <Card title="Card title" bordered={false} style={{ width: 300 }}>
+    <Card title="Card title" bordered={false} style={{ width: "100%" }}>
       {title}, {rocketName}, {description}
     </Card>
   );
