@@ -1,6 +1,6 @@
 import { Canvas } from "@react-three/fiber";
 
-import { Stars } from "../StarsThreeJs";
+import { Stars } from "../Stars";
 
 const Background = () => {
   return (
@@ -8,6 +8,7 @@ const Background = () => {
       style={{
         height: "100vh",
         background: "black",
+        position: "fixed",
       }}
     >
       <Stars />

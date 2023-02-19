@@ -5,7 +5,7 @@ import { Fragment } from "react";
 import { Provider } from "react-redux";
 
 import { wrapper } from "@/app/store/store";
-import { Page } from "@/types/page";
+import { Page } from "@/shared/types/page";
 
 type Props = AppProps & {
   Component: Page;

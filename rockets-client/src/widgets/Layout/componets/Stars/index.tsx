@@ -1,4 +1,5 @@
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
 import {
   BufferGeometry,
   Float32BufferAttribute,
@@ -7,7 +8,7 @@ import {
 } from "three";
 
 const randomDecimal = () => {
-  const precision = 100; // 2 decimals
+  const precision = 100;
   return (
     Math.floor(
       Math.random() * (10 * precision - 1 * precision) + 1 * precision
@@ -27,7 +28,6 @@ const angleVector = (angle: number, distance: number) => {
 const bearing = 235;
 
 export const Stars = () => {
-  // create the particle variables
   const particleCount = 400;
   const particleSize = 0.02;
   const particleTrailSize = 25;
@@ -36,7 +36,6 @@ export const Stars = () => {
   const particleDepth = 10;
   const scale = 50;
 
-  // container width and height
   const { size } = useThree();
   const width = size.width / scale;
   const height = size.height / scale;
@@ -49,11 +48,11 @@ export const Stars = () => {
 
   const particles = [];
   const particleOptions = [];
-  // now create the individual particles
+
   for (var p = 0; p < particleCount; p++) {
     const x = MathUtils.randFloatSpread(width);
     const y = MathUtils.randFloatSpread(height);
-    // const z = 0;
+
     const z = MathUtils.randFloatSpread(particleDepth);
     particles.push(x, y, z);
     for (let i = 0; i < particleTrailSize; i++) {
@@ -81,21 +80,21 @@ export const Stars = () => {
         z: index + 2,
       };
       const vector = angleVector(bearing, p.speed);
-      // x
+
       particles[particle.x] += vector.x;
       if (particles[particle.x] > bounds.right) {
         particles[particle.x] = bounds.left;
       } else if (particles[particle.x] < bounds.left) {
         particles[particle.x] = bounds.right;
       }
-      // y
+
       particles[particle.y] += vector.y;
       if (particles[particle.y] > bounds.bottom) {
         particles[particle.y] = bounds.top;
       } else if (particles[particle.y] < bounds.top) {
         particles[particle.y] = bounds.bottom;
       }
-      // trail
+
       const gap = angleVector(bearing, particleTrailGap);
       for (let n = 0; n < particleTrailSize; n++) {
         const x = particle.x + 3 * (n + 1);
