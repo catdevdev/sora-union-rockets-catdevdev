@@ -10,6 +10,7 @@ importers:
 
   rockets-client:
     specifiers:
+      '@ant-design/icons': ^5.0.1
       '@next/font': 13.1.6
       '@react-three/fiber': ^8.11.2
       '@reduxjs/toolkit': ^1.9.2
@@ -37,6 +38,7 @@ importers:
       three: ^0.149.0
       typescript: 4.9.5
     dependencies:
+      '@ant-design/icons': 5.0.1_biqbaboplfbrettd7655fr4n2y
       '@next/font': 13.1.6
       '@react-three/fiber': 8.11.2_xor7byvqlg4baqj6ymfbcmaax4
       '@reduxjs/toolkit': 1.9.2_k4ae6lp43ej6mezo3ztvx6pykq

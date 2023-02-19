@@ -1,5 +1,6 @@
 import "../app/styles/globals.css";
 
+import { ConfigProvider, theme } from "antd";
 import type { AppProps } from "next/app";
 import { Fragment } from "react";
 import { Provider } from "react-redux";
@@ -18,7 +19,9 @@ const App = ({ Component, ...rest }: Props) => {
 
   return (
     <Provider store={store}>
-      <Layout>{getLayout(<Component {...props.pageProps} />)}</Layout>
+      <ConfigProvider>
+        <Layout>{getLayout(<Component {...props.pageProps} />)}</Layout>
+      </ConfigProvider>
     </Provider>
   );
 };
