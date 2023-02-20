@@ -7,10 +7,6 @@ import GitHubUserAutocompliteInput from "@/features/GitHubUserAutocompliteInput"
 import useAutocomplite from "@/features/GitHubUserAutocompliteInput/useAutocomplite";
 import { useAppDispatch } from "@/shared/hooks/redux";
 
-const onFinishFailed = (errorInfo: any) => {
-  console.log("Failed:", errorInfo);
-};
-
 const FormAddRocket = ({}) => {
   const dispatch = useAppDispatch();
   const [selectedGithubUserData, selectGithubUserData] =
@@ -49,7 +45,6 @@ const FormAddRocket = ({}) => {
         name="basic"
         initialValues={{ remember: true }}
         onFinish={onFinish}
-        onFinishFailed={onFinishFailed}
         autoComplete="off"
         layout="vertical"
       >

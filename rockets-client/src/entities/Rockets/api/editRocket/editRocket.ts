@@ -8,7 +8,7 @@ export const editRocket = createAsyncThunk(
   "rockets/editRocket",
   async (rocket: EditRocketArgument, _): Promise<EditRocketResponse> => {
     const { id, ...rocketToBody } = rocket;
-    console.log(rocketToBody);
+
     const response = await axios.patch<EditRocketResponse>(
       `/rockets/${id}`,
       rocketToBody

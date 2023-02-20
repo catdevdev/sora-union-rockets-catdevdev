@@ -44,7 +44,6 @@ const rocketsSlice = createSlice({
       state.isPaginationLoading = true;
     });
     builder.addCase(fetchMoreRockets.fulfilled, (state, action) => {
-      console.log(action.payload);
       if (action.payload.length === 0) {
         state.hasMore = false;
         state.isLoading = false;
@@ -147,7 +146,5 @@ const rocketsSlice = createSlice({
     builder.addCase(editRocket.rejected, (state, action) => {});
   },
 });
-
-// editRocket
 
 export { rocketsSlice };
