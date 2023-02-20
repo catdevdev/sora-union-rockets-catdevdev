@@ -1,6 +1,6 @@
 # Rockets Project 🚀
 
-### Demo Link: http://vladsugar.od.ua:5554/
+### Demo Link: https://sora-union-rockets-catdevdev-9lhf.vercel.app/
 
 Welcome to the Rockets project! This is a monorepo using pnpm as a package manager with two projects, "rockets-client" and "rockets-server". This project is all about rockets.
 
