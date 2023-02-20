@@ -43,31 +43,34 @@ const RocketChangeGitHubUserModal = ({
   });
   const dispatch = useAppDispatch();
   return (
-    <Modal
-      title="Change Github User"
-      open={isOpen}
-      onOk={() => {
-        setIsOpen(false);
-        if (selectedGithubUserData) {
-          dispatch(editRocket({ id, githubUser: selectedGithubUserData }));
-        }
-      }}
-      onCancel={() => {
-        setIsOpen(false);
-      }}
-      okText="Change"
-      cancelText="Close"
-    >
-      <Form name="basic" autoComplete="off" layout="vertical">
-        <AutoComplete
-          options={options}
-          style={{ width: "100%" }}
-          onSelect={onSelect}
-          onSearch={onSearch}
-          placeholder="Start Typing for Github User"
-        />
-      </Form>
-    </Modal>
+    <>
+      {contextHolder}
+      <Modal
+        title="Change Github User"
+        open={isOpen}
+        onOk={() => {
+          setIsOpen(false);
+          if (selectedGithubUserData) {
+            dispatch(editRocket({ id, githubUser: selectedGithubUserData }));
+          }
+        }}
+        onCancel={() => {
+          setIsOpen(false);
+        }}
+        okText="Change"
+        cancelText="Close"
+      >
+        <Form name="basic" autoComplete="off" layout="vertical">
+          <AutoComplete
+            options={options}
+            style={{ width: "100%" }}
+            onSelect={onSelect}
+            onSearch={onSearch}
+            placeholder="Start Typing for Github User"
+          />
+        </Form>
+      </Modal>
+    </>
   );
 };
 
