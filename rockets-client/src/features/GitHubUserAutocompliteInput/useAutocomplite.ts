@@ -1,5 +1,5 @@
 import { message } from "antd";
-import axios, { CancelTokenSource } from "axios";
+import axios, { AxiosError, CancelTokenSource } from "axios";
 import { useRef, useState } from "react";
 
 import { GithubUser } from "@/entities/Rockets/models/rockets";
@@ -43,11 +43,13 @@ const useAutocomplite = ({ onSelectGitHubUser }: AutocompliteHookProps) => {
       );
     } catch (err) {
       setOptions([]);
-      messageApi.open({
-        type: "error",
-        content: "Too many request",
-        duration: 1,
-      });
+      const error = err as AxiosError;
+      if (error.response?.status === 403)
+        messageApi.open({
+          type: "error",
+          content: "Too many request",
+          duration: 1,
+        });
     }
   };
 
