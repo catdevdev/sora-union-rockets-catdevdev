@@ -13,7 +13,7 @@ export const fetchMoreRockets = createAsyncThunk(
 
     const params: RocketsParams = {
       _page: getState().rocketsState.page,
-      _limit: 2,
+      _limit: 5,
     };
 
     const response = await axios.get<RocketsResponse>(`/rockets`, {

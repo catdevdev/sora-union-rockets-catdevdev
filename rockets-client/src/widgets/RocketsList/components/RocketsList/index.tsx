@@ -28,16 +28,26 @@ const RocketList = () => {
       hasMore={hasMore}
       loader={<Spin />}
     >
-      <Row gutter={[0, 24]}>
-        {[...rockets].reverse().map((rocket) => (
-          <RocketCard
-            key={rocket.id}
-            title={`${rocket.title} + ${rocket.id}`}
-            rocketName={rocket.rocket_name}
-            description={rocket.description}
-            isUploading={rocket.isUploading}
-          />
-        ))}
+      <Row
+        style={{
+          flexDirection: "column-reverse",
+        }}
+        gutter={[0, 24]}
+      >
+        {[...rockets]
+          .sort((rocketA, rocketB) => rocketA.id + rocketB.id)
+          .map((rocket) => (
+            <RocketCard
+              key={rocket.id}
+              id={rocket.id}
+              title={`${rocket.title} + ${rocket.id}`}
+              rocketName={rocket.rocket_name}
+              description={rocket.description}
+              isUploading={rocket.isUploading}
+              githubUserAvatarUrl={rocket.githubUser.avatar_url}
+              githubUserLogin={rocket.githubUser.login}
+            />
+          ))}
       </Row>
     </InfiniteScroll>
   );

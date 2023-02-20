@@ -1,7 +1,9 @@
 import { Button, Card, Form, Input, InputNumber } from "antd";
+import { useState } from "react";
 
 import { createRocket } from "@/entities/Rockets/api/createRocket/createRocket";
-import { Rocket } from "@/entities/Rockets/models/rockets";
+import { GithubUser, Rocket } from "@/entities/Rockets/models/rockets";
+import GitHubUserAutocompliteInput from "@/features/GitHubUserAutocompliteInput";
 import { useAppDispatch } from "@/shared/hooks/redux";
 
 const onFinishFailed = (errorInfo: any) => {
@@ -10,12 +12,33 @@ const onFinishFailed = (errorInfo: any) => {
 
 const FormAddRocket = ({}) => {
   const dispatch = useAppDispatch();
-  const onFinish = (values: Omit<Rocket, "id" | "isUploding">) => {
-    dispatch(createRocket(values));
+  const [selectedGithubUserData, selectGithubUserData] =
+    useState<GithubUser | null>();
+
+  const onSelectGitHubUser = (userData: GithubUser) => {
+    selectGithubUserData(userData);
+  };
+
+  const onFinish = (
+    newRocker: Omit<Rocket, "id" | "isUploding" | "githubUser">
+  ) => {
+    if (selectedGithubUserData) {
+      dispatch(
+        createRocket({
+          ...newRocker,
+          githubUser: selectedGithubUserData,
+        })
+      );
+    }
   };
 
   return (
-    <Card>
+    <Card
+      style={{
+        position: "sticky",
+        top: 36,
+      }}
+    >
       <Form
         name="basic"
         labelCol={{ span: 8 }}
@@ -48,6 +71,8 @@ const FormAddRocket = ({}) => {
         >
           <Input.TextArea />
         </Form.Item>
+
+        <GitHubUserAutocompliteInput onSelectGitHubUser={onSelectGitHubUser} />
 
         <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
           <Button type="primary" htmlType="submit">

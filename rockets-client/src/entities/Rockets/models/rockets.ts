@@ -5,6 +5,12 @@ export interface Rocket {
   description: string;
   isUploading: boolean;
   requestId: string;
+  githubUser: GithubUser;
+}
+
+export interface GithubUser {
+  login: string;
+  avatar_url: string;
 }
 
 export interface RocketsInitialState {

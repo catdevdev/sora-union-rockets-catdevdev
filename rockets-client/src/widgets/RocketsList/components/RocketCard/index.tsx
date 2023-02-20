@@ -2,48 +2,60 @@ import { DeleteOutlined } from "@ant-design/icons";
 import { Card, Col, Divider, List, Row, Spin, Typography } from "antd";
 import Image from "next/image";
 
+import { deleteRocketById } from "@/entities/Rockets";
+import { useAppDispatch } from "@/shared/hooks/redux";
+
 interface RocketCardProps {
+  id: number;
   title: string;
   rocketName: string;
   description: string;
   isUploading: boolean;
+  githubUserLogin: string;
+  githubUserAvatarUrl: string;
 }
 
 const { Title, Text } = Typography;
 
 const RocketCard = ({
+  id,
   title,
   rocketName,
   description,
   isUploading,
+  githubUserLogin,
+  githubUserAvatarUrl,
 }: RocketCardProps) => {
+  const dispatch = useAppDispatch();
+
   return (
     <Card
       title={title}
       bordered={false}
       extra={
         <>
-          <Spin size={"small"} />
-          {"  "}
-          <DeleteOutlined />
+          {isUploading ? <Spin size={"small"} /> : null}{" "}
+          <DeleteOutlined
+            onClick={() => {
+              dispatch(deleteRocketById({ id }));
+            }}
+            style={{
+              cursor: "pointer",
+            }}
+          />
         </>
       }
       style={{ width: "100%" }}
     >
       <Row align={"middle"} wrap={false}>
-        <Image
-          src="https://thumbs.gfycat.com/MemorableBetterCockroach-size_restricted.gif"
-          alt={title}
-          width="65"
-          height="65"
-        />
+        <Image src={githubUserAvatarUrl} alt={title} width="65" height="65" />
         <Title
           style={{
             margin: "0 12px",
           }}
           level={3}
         >
-          test
+          {githubUserLogin}
         </Title>
       </Row>
       <Row

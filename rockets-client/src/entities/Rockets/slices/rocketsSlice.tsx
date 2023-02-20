@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { v4 as uuidv4 } from "uuid";
 
 import { createRocket } from "../api/createRocket/createRocket";
 import { deleteRocketById } from "../api/deleteRocketById/deleteRocketById";
@@ -42,17 +43,18 @@ const rocketsSlice = createSlice({
       state.isPaginationLoading = true;
     });
     builder.addCase(fetchMoreRockets.fulfilled, (state, action) => {
+      console.log(action.payload);
       if (action.payload.length === 0) {
         state.hasMore = false;
         state.isLoading = false;
       }
       state.rockets = [
-        ...state.rockets,
         ...action.payload.map((rocket) => ({
           ...rocket,
           isUploading: false,
           requestId: action.meta.requestId,
         })),
+        ...state.rockets,
       ];
 
       state.page += 1;
@@ -72,12 +74,16 @@ const rocketsSlice = createSlice({
       state.rockets = [
         ...state.rockets,
         {
-          id: state.rockets.length + 2,
+          id: uuidv4() as unknown as number,
           title: action.meta.arg.title,
           rocket_name: action.meta.arg.rocket_name,
           description: action.meta.arg.description,
           isUploading: true,
           requestId: action.meta.requestId,
+          githubUser: {
+            login: action.meta.arg.githubUser.login,
+            avatar_url: action.meta.arg.githubUser.avatar_url,
+          },
         },
       ];
     });
@@ -91,14 +97,28 @@ const rocketsSlice = createSlice({
             description: action.payload.description,
             isUploading: false,
             requestId: action.meta.requestId,
+            githubUser: {
+              login: action.meta.arg.githubUser.login,
+              avatar_url: action.meta.arg.githubUser.avatar_url,
+            },
           };
         }
       });
     });
     builder.addCase(createRocket.rejected, (state, action) => {});
 
-    builder.addCase(deleteRocketById.pending, (state) => {});
-    builder.addCase(deleteRocketById.fulfilled, (state, action) => {});
+    builder.addCase(deleteRocketById.pending, (state, action) => {
+      state.rockets.forEach((rocket, index) => {
+        if (rocket.id === action.meta.arg.id) {
+          state.rockets[index].isUploading = true;
+        }
+      });
+    });
+    builder.addCase(deleteRocketById.fulfilled, (state, action) => {
+      state.rockets = state.rockets.filter(
+        (rocket) => rocket.id !== action.meta.arg.id
+      );
+    });
     builder.addCase(deleteRocketById.rejected, (state, action) => {});
   },
 });

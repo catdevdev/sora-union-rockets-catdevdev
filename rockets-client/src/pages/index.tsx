@@ -13,7 +13,6 @@ const Index = () => {
       style={{
         background: "rgba(255,255,255, 0.2)",
         position: "relative",
-        // zIndex: 1000000000000;
         width: "fit-content",
         margin: "0 auto",
         backdropFilter: "blur(5px)",
@@ -21,10 +20,10 @@ const Index = () => {
       justify="center"
       gutter={[36, 0]}
     >
-      <Col style={{ width: 350 }}>
+      <Col style={{ width: 350, marginTop: 45 }}>
         <RocketsList />
       </Col>
-      <Col style={{ width: 300 }}>
+      <Col style={{ width: 300, marginTop: 45 }}>
         <FormAddRocket />
       </Col>
     </Row>
