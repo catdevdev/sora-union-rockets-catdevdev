@@ -1,3 +1,4 @@
+import { message } from "antd";
 import axios, { CancelTokenSource } from "axios";
 import { useRef, useState } from "react";
 
@@ -18,6 +19,7 @@ interface AutocompliteHookProps {
 const useAutocomplite = ({ onSelectGitHubUser }: AutocompliteHookProps) => {
   const [options, setOptions] = useState<{ value: string }[]>([]);
   const cancelTokenSourceRef = useRef<CancelTokenSource | null>(null);
+  const [messageApi, contextHolder] = message.useMessage();
 
   const onSearch = async (searchText: string) => {
     if (cancelTokenSourceRef.current) {
@@ -41,6 +43,11 @@ const useAutocomplite = ({ onSelectGitHubUser }: AutocompliteHookProps) => {
       );
     } catch (err) {
       setOptions([]);
+      messageApi.open({
+        type: "error",
+        content: "Too many request",
+        duration: 1,
+      });
     }
   };
 
@@ -52,7 +59,7 @@ const useAutocomplite = ({ onSelectGitHubUser }: AutocompliteHookProps) => {
       onSelectGitHubUser(res.data);
     } catch (err) {}
   };
-  return { options, onSearch, onSelect };
+  return { options, onSearch, onSelect, contextHolder };
 };
 
 export default useAutocomplite;

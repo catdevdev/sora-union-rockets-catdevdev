@@ -1,4 +1,12 @@
-import { AutoComplete, Button, Card, Form, Input, InputNumber } from "antd";
+import {
+  AutoComplete,
+  Button,
+  Card,
+  Form,
+  Input,
+  InputNumber,
+  message,
+} from "antd";
 import { useState } from "react";
 
 import { createRocket } from "@/entities/Rockets/api/createRocket/createRocket";
@@ -16,7 +24,7 @@ const FormAddRocket = ({}) => {
     selectGithubUserData(userData);
   };
 
-  const { options, onSelect, onSearch } = useAutocomplite({
+  const { options, onSelect, onSearch, contextHolder } = useAutocomplite({
     onSelectGitHubUser,
   });
 
@@ -41,6 +49,7 @@ const FormAddRocket = ({}) => {
       }}
       title={"Create Awesome Rocket 🚀"}
     >
+      {contextHolder}
       <Form
         name="basic"
         initialValues={{ remember: true }}
