@@ -10,6 +10,18 @@ The `rockets-client` project uses a feature-sliced design methodology. https://f
 
 ![alt text](https://feature-sliced.design/assets/ideal-img/visual_schema.d700567.1030.jpg)
 
+# SSR
+
+In this project, SSR is used to fetch a list of rockets from the API and display them on the main page. The code for fetching the data is located in pages/index.tsx, and looks like this:
+```
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async () => {
+    await store.dispatch(fetchRockets());
+    return {};
+  }
+);
+```
+
 # Getting started 🐝
 
 To get started with the project, clone the repository to your local machine and run the following commands:
