@@ -11,7 +11,6 @@ import { useState } from "react";
 
 import { createRocket } from "@/entities/Rockets/api/createRocket/createRocket";
 import { GithubUser, Rocket } from "@/entities/Rockets/models/rockets";
-import GitHubUserAutocompliteInput from "@/features/GitHubUserAutocompliteInput";
 import useAutocomplite from "@/features/GitHubUserAutocompliteInput/useAutocomplite";
 import { useAppDispatch } from "@/shared/hooks/redux";
 
