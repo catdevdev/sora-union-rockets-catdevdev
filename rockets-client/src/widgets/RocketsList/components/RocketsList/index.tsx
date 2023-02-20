@@ -1,25 +1,11 @@
-import { Card, Col, Row, Skeleton, Spin } from "antd";
+import { Card, Row, Skeleton } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import { fetchMoreRockets, fetchRockets } from "@/entities/Rockets";
-import { useAppDispatch, useAppSelector } from "@/shared/hooks/redux";
-
+import useInfinityScroling from "../../hooks/useInfinityScroling";
 import RocketCard from "../RocketCard";
 
 const RocketList = () => {
-  const dispatch = useAppDispatch();
-
-  const { isLoading, isPaginationLoading, hasMore } = useAppSelector(
-    (state) => state.rocketsState
-  );
-
-  const rockets = useAppSelector((state) => state.rocketsState.rockets);
-
-  const fetchMoreData = () => {
-    if (!isLoading && hasMore) {
-      dispatch(fetchMoreRockets());
-    }
-  };
+  const { rockets, fetchMoreData, hasMore } = useInfinityScroling();
 
   return (
     <InfiniteScroll

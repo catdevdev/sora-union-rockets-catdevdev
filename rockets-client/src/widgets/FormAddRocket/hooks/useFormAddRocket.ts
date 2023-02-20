@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import { createRocket } from "@/entities/Rockets/api/createRocket/createRocket";
 import { GithubUser, Rocket } from "@/entities/Rockets/models/rockets";
-import useAutocomplite from "@/features/GitHubUserAutocompliteInput/useAutocomplite";
+import useAutocomplite from "@/features/GitHubUserAutocompliteInput/hooks/useAutocomplite";
 import { useAppDispatch } from "@/shared/hooks/redux";
 
 const useFormAddRocket = () => {

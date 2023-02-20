@@ -19,7 +19,7 @@ import { useState } from "react";
 import { deleteRocketById } from "@/entities/Rockets";
 import { editRocket } from "@/entities/Rockets/api/editRocket/editRocket";
 import { GithubUser } from "@/entities/Rockets/models/rockets";
-import useAutocomplite from "@/features/GitHubUserAutocompliteInput/useAutocomplite";
+import useAutocomplite from "@/features/GitHubUserAutocompliteInput/hooks/useAutocomplite";
 import { useAppDispatch } from "@/shared/hooks/redux";
 
 interface RocketChangeGitHubUserModalProps {
