@@ -47,6 +47,7 @@ export const Stars = () => {
   };
 
   const particles = [];
+  // @ts-ignore
   const particleOptions = [];
 
   for (var p = 0; p < particleCount; p++) {
@@ -64,6 +65,7 @@ export const Stars = () => {
   }
 
   const geometry = new BufferGeometry();
+  // @ts-ignore
   geometry.dynamic = true;
   geometry.setAttribute("position", new Float32BufferAttribute(particles, 3));
   const material = new PointsMaterial({ color: "white", size: particleSize });
@@ -71,7 +73,9 @@ export const Stars = () => {
   let log = true;
   let count = 0;
   useFrame(() => {
+    // @ts-ignore
     const particles = geometry.attributes.position.array;
+    // @ts-ignore
     particleOptions.forEach((p, i) => {
       const index = i * (3 + particleTrailSize * 3);
       const particle = {
@@ -111,6 +115,6 @@ export const Stars = () => {
     count++;
     geometry.attributes.position.needsUpdate = true;
   });
-
+  // @ts-ignore
   return <points args={[geometry, material]} sortParticles={true} />;
 };
