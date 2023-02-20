@@ -51,7 +51,7 @@ const RocketList = () => {
             <RocketCard
               key={rocket.id}
               id={rocket.id}
-              title={`${rocket.title} + ${rocket.id}`}
+              title={rocket.title}
               rocketName={rocket.rocket_name}
               description={rocket.description}
               isUploading={rocket.isUploading}
