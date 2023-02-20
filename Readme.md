@@ -17,10 +17,12 @@ In this project, SSR is used to fetch a list of rockets from the API and display
 export const getServerSideProps = wrapper.getServerSideProps(
   (store) => async () => {
     await store.dispatch(fetchRockets());
-    return {};
   }
 );
 ```
+### Redux/Toolkit and SSR
+
+To synchronize the state of the `Redux/Toolkit` repository between the *server* and the *client*, the `Next.js` uses the next-redux-wrapper library.
 
 # Getting started 🐝
 
