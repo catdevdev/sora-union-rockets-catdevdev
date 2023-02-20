@@ -1,44 +1,16 @@
-import {
-  AutoComplete,
-  Button,
-  Card,
-  Form,
-  Input,
-  InputNumber,
-  message,
-} from "antd";
-import { useState } from "react";
+import { AutoComplete, Button, Card, Form, Input } from "antd";
 
-import { createRocket } from "@/entities/Rockets/api/createRocket/createRocket";
-import { GithubUser, Rocket } from "@/entities/Rockets/models/rockets";
-import useAutocomplite from "@/features/GitHubUserAutocompliteInput/useAutocomplite";
-import { useAppDispatch } from "@/shared/hooks/redux";
+import useFormAddRocket from "./hooks/useFormAddRocket";
 
 const FormAddRocket = ({}) => {
-  const dispatch = useAppDispatch();
-  const [selectedGithubUserData, selectGithubUserData] =
-    useState<GithubUser | null>();
-
-  const onSelectGitHubUser = (userData: GithubUser) => {
-    selectGithubUserData(userData);
-  };
-
-  const { options, onSelect, onSearch, contextHolder } = useAutocomplite({
-    onSelectGitHubUser,
-  });
-
-  const onFinish = (
-    newRocker: Omit<Rocket, "id" | "isUploding" | "githubUser">
-  ) => {
-    if (selectedGithubUserData) {
-      dispatch(
-        createRocket({
-          ...newRocker,
-          githubUser: selectedGithubUserData,
-        })
-      );
-    }
-  };
+  const {
+    contextHolder,
+    onFinish,
+    selectedGithubUserData,
+    options,
+    onSelect,
+    onSearch,
+  } = useFormAddRocket();
 
   return (
     <Card
