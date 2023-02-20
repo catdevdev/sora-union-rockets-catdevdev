@@ -3,6 +3,7 @@ import { Card, Col, Divider, List, Row, Spin, Typography } from "antd";
 import Image from "next/image";
 
 import { deleteRocketById } from "@/entities/Rockets";
+import { editRocket } from "@/entities/Rockets/api/editRocket/editRocket";
 import { useAppDispatch } from "@/shared/hooks/redux";
 
 interface RocketCardProps {
@@ -63,12 +64,25 @@ const RocketCard = ({
           marginTop: 12,
         }}
       >
-        <Text>🚀 Rocket Name is</Text>
         <Text
+          style={{
+            width: "100%",
+            fontSize: 18,
+          }}
+        >
+          🚀 Rocket Name
+        </Text>
+
+        <Text
+          style={{
+            fontSize: 18,
+          }}
           editable={{
             triggerType: ["text", "icon"],
             tooltip: "click to edit 🚀 Rocket Name",
-            onChange: () => {},
+            onChange: (rocket_name) => {
+              dispatch(editRocket({ id, rocket_name }));
+            },
           }}
           keyboard
           italic
@@ -82,10 +96,23 @@ const RocketCard = ({
         }}
       >
         <Text
+          style={{
+            width: "100%",
+            fontSize: 18,
+          }}
+        >
+          💬 Description
+        </Text>
+        <Text
+          style={{
+            fontSize: 18,
+          }}
           editable={{
             triggerType: ["text", "icon"],
             tooltip: "click to edit 🚀 Rocket Name",
-            onChange: () => {},
+            onChange: (description) => {
+              dispatch(editRocket({ id, description }));
+            },
           }}
           italic
         >

@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 
 import { createRocket } from "../api/createRocket/createRocket";
 import { deleteRocketById } from "../api/deleteRocketById/deleteRocketById";
+import { editRocket } from "../api/editRocket/editRocket";
 import { fetchMoreRockets } from "../api/fetchMoreRockets/fetchMoreRockets";
 import { fetchRockets } from "../api/fetchRockets/fetchRockets";
 import { RocketsInitialState } from "../models/rockets";
@@ -107,6 +108,8 @@ const rocketsSlice = createSlice({
     });
     builder.addCase(createRocket.rejected, (state, action) => {});
 
+    //
+
     builder.addCase(deleteRocketById.pending, (state, action) => {
       state.rockets.forEach((rocket, index) => {
         if (rocket.id === action.meta.arg.id) {
@@ -120,7 +123,31 @@ const rocketsSlice = createSlice({
       );
     });
     builder.addCase(deleteRocketById.rejected, (state, action) => {});
+
+    //
+
+    builder.addCase(editRocket.pending, (state, action) => {
+      state.rockets.forEach((rocket, index) => {
+        if (rocket.id === action.meta.arg.id) {
+          state.rockets[index].isUploading = true;
+        }
+      });
+    });
+    builder.addCase(editRocket.fulfilled, (state, action) => {
+      const updatedRocket = action.payload;
+      const index = state.rockets.findIndex(
+        (rocket) => rocket.id === updatedRocket.id
+      );
+
+      if (index !== -1) {
+        state.rockets[index] = { ...updatedRocket, isUploading: false };
+        // state.rockets[index].isUploading = false;
+      }
+    });
+    builder.addCase(editRocket.rejected, (state, action) => {});
   },
 });
+
+// editRocket
 
 export { rocketsSlice };
