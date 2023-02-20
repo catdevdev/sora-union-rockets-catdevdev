@@ -38,44 +38,51 @@ const FormAddRocket = ({}) => {
         position: "sticky",
         top: 36,
       }}
+      title={"Create Awesome Rocket 🚀"}
     >
       <Form
         name="basic"
-        labelCol={{ span: 8 }}
-        wrapperCol={{ span: 16 }}
         initialValues={{ remember: true }}
         onFinish={onFinish}
         onFinishFailed={onFinishFailed}
         autoComplete="off"
+        layout="vertical"
       >
         <Form.Item
-          label="title"
+          label="Title"
           name="title"
-          rules={[{ required: true, message: "Please input title!" }]}
+          rules={[{ required: true, message: "Please Input Title!" }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="rocket_name"
+          label="Rocket Name"
           name="rocket_name"
-          rules={[{ required: true, message: "Please input title!" }]}
+          rules={[{ required: true, message: "Please Input Rocket Name!" }]}
         >
           <Input />
         </Form.Item>
 
         <Form.Item
-          label="description"
+          label="Description"
           name="description"
-          rules={[{ required: true, message: "Please input description!" }]}
+          rules={[{ required: true, message: "Please Input Description!" }]}
         >
           <Input.TextArea />
         </Form.Item>
+        <Form.Item
+          label="GitHub User"
+          name="github_user"
+          rules={[{ required: true, message: "Please Select GitHub User!" }]}
+        >
+          <GitHubUserAutocompliteInput
+            onSelectGitHubUser={onSelectGitHubUser}
+          />
+        </Form.Item>
 
-        <GitHubUserAutocompliteInput onSelectGitHubUser={onSelectGitHubUser} />
-
-        <Form.Item wrapperCol={{ offset: 8, span: 16 }}>
-          <Button type="primary" htmlType="submit">
+        <Form.Item>
+          <Button style={{ width: "100%" }} type="primary" htmlType="submit">
             Create rocket
           </Button>
         </Form.Item>

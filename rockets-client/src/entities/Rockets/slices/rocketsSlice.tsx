@@ -48,6 +48,7 @@ const rocketsSlice = createSlice({
       if (action.payload.length === 0) {
         state.hasMore = false;
         state.isLoading = false;
+        return;
       }
       state.rockets = [
         ...action.payload.map((rocket) => ({
@@ -141,7 +142,6 @@ const rocketsSlice = createSlice({
 
       if (index !== -1) {
         state.rockets[index] = { ...updatedRocket, isUploading: false };
-        // state.rockets[index].isUploading = false;
       }
     });
     builder.addCase(editRocket.rejected, (state, action) => {});

@@ -1,4 +1,4 @@
-import { Col, Row, Spin } from "antd";
+import { Card, Col, Row, Skeleton, Spin } from "antd";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import { fetchMoreRockets, fetchRockets } from "@/entities/Rockets";
@@ -26,7 +26,18 @@ const RocketList = () => {
       dataLength={rockets.length}
       next={fetchMoreData}
       hasMore={hasMore}
-      loader={<Spin />}
+      loader={
+        <Card
+          style={{
+            width: "100%",
+            height: 250,
+            marginTop: 28,
+            marginBottom: 28,
+          }}
+        >
+          <Skeleton loading={true} avatar active></Skeleton>
+        </Card>
+      }
     >
       <Row
         style={{
